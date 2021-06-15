@@ -7,6 +7,7 @@ import {
   DefinitionSource,
   DiagnosticsSource,
   EditorAction,
+  emptyLocation,
   HoverSource,
   locToRange,
 } from './utils';
@@ -20,6 +21,7 @@ import {
 export type EditorApi = {
   jumpToType(typeName: string): void;
   jumpToField(typeName: string, fieldName: string): void;
+  deselect(): void;
 };
 
 export type SchemaEditorProps = {
@@ -90,26 +92,11 @@ function BaseSchemaEditor(
             const type = schema.getType(typeName);
 
             if (type?.astNode?.loc) {
-<<<<<<< HEAD
-              const startLineNumber = type.astNode.loc.startToken.line;
-
-              editorRef?.setSelection({
-                startLineNumber,
-                startColumn: type.astNode.loc.startToken.column,
-                endLineNumber: type.astNode.loc.endToken.line + 1,
-                endColumn: type.astNode.loc.endToken.column,
-              });
-              
-              editorRef?.revealPositionInCenter(
-                { column: 0, lineNumber: startLineNumber },
-                0,
-=======
               const range = locToRange(type.astNode.loc);
               editorRef?.setSelection(range);
               editorRef?.revealPositionInCenter(
                 { column: 0, lineNumber: range.startLineNumber },
                 0
->>>>>>> cc24e9c8b93c020b23b4f52e77b43eef8d382ecb
               );
             }
           }
@@ -135,6 +122,7 @@ function BaseSchemaEditor(
           }
         });
       },
+      deselect: () => editorRef?.setSelection(emptyLocation),
     }),
     [editorRef, languageService]
   );
