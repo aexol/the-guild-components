@@ -1,6 +1,6 @@
 {
   "name": "@theguild/components",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "license": "MIT",
   "module": "dist/index.esm.js",
   "main": "dist/index.js",
@@ -23,9 +23,10 @@
     "react-player": "^2.9.0",
     "tailwindcss": "^2.1.4",
     "twin.macro": "^2.4.2",
-    "use-debounce": "^6.0.1",
+    "use-debounce": "^7.0.0",
     "@emotion/react": "^11.4.0",
-    "@emotion/styled": "^11.3.0"
+    "@emotion/styled": "^11.3.0",
+    "validator": "13.6.0"
   },
   "publishConfig": {
     "access": "public"
